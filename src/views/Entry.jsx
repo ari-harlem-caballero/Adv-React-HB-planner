@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useEntries } from '../context/PlannerContext';
 
 import styles from './Entry.css';
@@ -8,13 +9,13 @@ import styles from './Entry.css';
 export default function Entry() {
   const { id } = useParams();
   const [entry, setEntry] = useState({});
-  const { entries, getEntry, onUpdate } = useEntries();
+  const { entries, getEntry, onUpdate, onDelete } = useEntries();
   const [isEditing, setIsEditing] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     setEntry(getEntry(id));
   }, [id, entries.length, entries]);
-
 
   let content;
   if (!isEditing) {
@@ -30,6 +31,15 @@ export default function Entry() {
         </article>
         <button type="button" onClick={() => setIsEditing(true)}>
           Edit
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            onDelete(entry.id);
+            history.replace('/');
+          }}
+        >
+          Delete
         </button>
       </>
     );

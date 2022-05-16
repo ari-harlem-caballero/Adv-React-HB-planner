@@ -59,6 +59,10 @@ const PlannerProvider = ({ children }) => {
     dispatch({ type: 'update', payload: entry });
   };
 
+  const onDelete = (id) => {
+    dispatch({ type: 'delete', payload: { id } });
+  };
+
   const entriesCount = entries.length;
 
   return (
@@ -68,7 +72,8 @@ const PlannerProvider = ({ children }) => {
         addEntry,
         getEntry,
         entriesCount,
-        onUpdate
+        onUpdate,
+        onDelete,
       }}
     >
       {children}
