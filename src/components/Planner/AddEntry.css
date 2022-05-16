@@ -1,0 +1,24 @@
+.formWrapper {
+  margin: 0 1.5rem 0 1.5rem;
+  width: 275px;
+  height: 225px;
+}
+
+.form {
+  display: grid;
+  grid: 1fr 1fr 2.2fr 1fr / 1fr;
+  gap: 0.5rem;
+}
+
+.content {
+  resize: none;
+  padding: 0.5em;
+}
+
+.input {
+  padding: 0.5em;
+}
+
+.error {
+  color: var(--red);
+}

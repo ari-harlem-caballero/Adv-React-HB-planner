@@ -1,0 +1,29 @@
+:root {
+  --font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+    sans-serif;
+  --dark: #222;
+  --light: #eee;
+  --yellow: rgb(255, 225, 122);
+  --red: rgb(255, 72, 72);
+}
+
+html,
+body {
+  color: var(--light);
+  background: var(--dark);
+  font-family: var(--font-family);
+  color: var(--yellow);
+}
+
+input,
+textarea,
+button {
+  font-family: var(--font-family);
+  border-radius: 4px;
+  border: 1px solid var(--dark);
+}
+
+a {
+  color: var(--yellow);
+  text-decoration: none;
+}
