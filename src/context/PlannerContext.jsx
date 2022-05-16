@@ -55,12 +55,15 @@ const PlannerProvider = ({ children }) => {
     return entries.find((note) => note.id === Number(id));
   };
 
+  const entriesCount = entries.length;
+
   return (
     <PlannerContext.Provider
       value={{
         entries,
         addEntry,
         getEntry,
+        entriesCount,
       }}
     >
       {children}
