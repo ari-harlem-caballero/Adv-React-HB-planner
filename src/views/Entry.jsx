@@ -8,12 +8,13 @@ import styles from './Entry.css';
 export default function Entry() {
   const { id } = useParams();
   const [entry, setEntry] = useState({});
-  const { entries, getEntry } = useEntries();
+  const { entries, getEntry, onUpdate } = useEntries();
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     setEntry(getEntry(id));
-  }, [id, entries.length]);
+  }, [id, entries.length, entries]);
+
 
   let content;
   if (!isEditing) {
@@ -35,7 +36,12 @@ export default function Entry() {
   } else {
     content = (
       <>
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setIsEditing(false);
+          }}
+        >
           <input
             type="text"
             value={entry.title}

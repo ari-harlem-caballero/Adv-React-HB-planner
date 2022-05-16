@@ -55,6 +55,10 @@ const PlannerProvider = ({ children }) => {
     return entries.find((note) => note.id === Number(id));
   };
 
+  const onUpdate = (entry) => {
+    dispatch({ type: 'update', payload: entry });
+  };
+
   const entriesCount = entries.length;
 
   return (
@@ -64,6 +68,7 @@ const PlannerProvider = ({ children }) => {
         addEntry,
         getEntry,
         entriesCount,
+        onUpdate
       }}
     >
       {children}
