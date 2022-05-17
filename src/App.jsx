@@ -7,7 +7,7 @@ import './App.css';
 
 export default function App() {
   return (
-    <> {/* TODO: Add PlannerProvider */}
+    <>
       <Header />
       <BrowserRouter>
         <Switch>

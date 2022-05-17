@@ -24,11 +24,12 @@ function entriesReducer(entries, { type, payload }) {
 export const PlannerContext = createContext();
 
 const PlannerProvider = ({ children }) => {
+  const localEntries = JSON.parse(localStorage.getItem('entries'));
   const [entries, dispatch] = useReducer(entriesReducer, []);
 
   useEffect(() => {
     // Note that 'entries' below would likely be an API request in practice
-    const entries = [
+    const entries = localEntries || [
       {
         id: 0,
         title: 'Start Planning',
@@ -41,6 +42,10 @@ const PlannerProvider = ({ children }) => {
       payload: entries,
     });
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('entries', JSON.stringify(entries));
+  }, [entries]);
 
   const addEntry = (entry) => {
     const payload = {
@@ -55,12 +60,25 @@ const PlannerProvider = ({ children }) => {
     return entries.find((note) => note.id === Number(id));
   };
 
+  const onUpdate = (entry) => {
+    dispatch({ type: 'update', payload: entry });
+  };
+
+  const onDelete = (id) => {
+    dispatch({ type: 'delete', payload: { id } });
+  };
+
+  const entriesCount = entries.length;
+
   return (
     <PlannerContext.Provider
       value={{
         entries,
         addEntry,
         getEntry,
+        entriesCount,
+        onUpdate,
+        onDelete,
       }}
     >
       {children}
